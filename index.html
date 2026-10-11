@@ -1,243 +1,1080 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHAN JIANG | Personal Homepage</title>
-    <!-- Bootstrap5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        body {
-            padding-top: 60px;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans‑serif;
-        }
-        .section {
-            padding: 60px 0;
-        }
-        .project-card{
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border-radius: 12px;
-            margin-bottom:2rem;
-        }
-        .avatar-placeholder{
-            width: 200px;
-            height:200px;
-            border:2px dashed #adb5bd;
-            border-radius: 50%;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            color:#6c757d;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shan Jiang | MSc Robotics, University of Manchester</title>
+<meta name="description" content="Personal portfolio of Shan Jiang, MSc Robotics student at the University of Manchester: robotics autonomy, large language model training, front-end and game development." />
+<meta name="author" content="Shan Jiang" />
+<meta name="theme-color" content="#4f46e5" />
+<style>
+/* ============================================================
+   Shan Jiang — single-page portfolio
+   Layout and CSS written from scratch for this page.
+   ============================================================ */
+
+:root{
+  --bg:#f4f6fb;
+  --bg-veil:radial-gradient(1000px 520px at 12% -10%, rgba(79,70,229,.16), transparent 60%),
+            radial-gradient(900px 520px at 92% 0%, rgba(6,182,212,.14), transparent 62%);
+  --surface:#ffffff;
+  --surface-2:#eef1f8;
+  --text:#101424;
+  --muted:#5a6480;
+  --border:#e0e5f0;
+  --accent:#4f46e5;
+  --accent-soft:rgba(79,70,229,.10);
+  --accent-2:#0d9bb8;
+  --ring:rgba(79,70,229,.35);
+  --shadow:0 16px 40px -22px rgba(16,24,40,.35);
+  --shadow-sm:0 6px 18px -12px rgba(16,24,40,.35);
+  --radius:20px;
+  --maxw:1100px;
+  --nav-h:66px;
+}
+
+html[data-theme="dark"]{
+  --bg:#0a0d14;
+  --bg-veil:radial-gradient(1000px 520px at 12% -10%, rgba(99,102,241,.24), transparent 60%),
+            radial-gradient(900px 520px at 92% 0%, rgba(34,211,238,.16), transparent 62%);
+  --surface:#131926;
+  --surface-2:#1a2231;
+  --text:#e9edf7;
+  --muted:#9aa5bd;
+  --border:#232c3d;
+  --accent:#8f8bfb;
+  --accent-soft:rgba(143,139,251,.14);
+  --accent-2:#22d3ee;
+  --ring:rgba(143,139,251,.45);
+  --shadow:0 20px 44px -24px rgba(0,0,0,.75);
+  --shadow-sm:0 8px 22px -14px rgba(0,0,0,.7);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 18px);
+  -webkit-text-size-adjust:100%;
+  overflow-x:clip;
+}
+
+body{
+  margin:0;
+  background-color:var(--bg);
+  background-image:var(--bg-veil);
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:"Inter","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  font-size:16.5px;
+  line-height:1.68;
+  letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+img,video{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{line-height:1.2;margin:0;letter-spacing:-.015em;font-weight:700}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+ul{margin:0;padding:0;list-style:none}
+
+::selection{background:var(--accent);color:#fff}
+
+:focus-visible{outline:3px solid var(--ring);outline-offset:3px;border-radius:6px}
+
+.skip-link{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  background:var(--accent);color:#fff;padding:.7rem 1.1rem;border-radius:0 0 12px 0;font-weight:600;
+}
+.skip-link:focus{left:0}
+
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:22px}
+
+/* ---------------- Navigation ---------------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  background:var(--surface);
+  background:color-mix(in srgb, var(--surface) 78%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.nav__inner{
+  height:var(--nav-h);display:flex;align-items:center;gap:18px;
+  width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:22px;
+}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:800;letter-spacing:-.02em}
+.brand__mark{
+  width:34px;height:34px;border-radius:11px;flex:none;
+  display:grid;place-items:center;font-size:.82rem;color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  box-shadow:0 6px 16px -8px var(--accent);
+}
+.brand__name{font-size:1rem;white-space:nowrap}
+.brand__name span{display:block;font-size:.66rem;font-weight:600;color:var(--muted);letter-spacing:.09em;text-transform:uppercase}
+
+.nav__links{margin-left:auto;display:flex;align-items:center;gap:4px}
+.nav__link{
+  text-decoration:none;font-size:.9rem;font-weight:600;color:var(--muted);
+  padding:.5rem .8rem;border-radius:10px;transition:color .2s,background .2s;white-space:nowrap;
+}
+.nav__link:hover{color:var(--text);background:var(--surface-2)}
+.nav__link.is-current{color:var(--accent);background:var(--accent-soft)}
+
+.nav__tools{display:flex;align-items:center;gap:8px}
+.icon-btn{
+  width:38px;height:38px;border-radius:11px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);cursor:pointer;
+  display:grid;place-items:center;transition:border-color .2s,transform .2s,background .2s;
+}
+.icon-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.icon-btn svg{width:18px;height:18px}
+html[data-theme="light"] .icon-sun{display:none}
+html[data-theme="dark"] .icon-moon{display:none}
+
+.burger{display:none}
+
+/* ---------------- Hero ---------------- */
+.hero{padding:clamp(48px,8vw,96px) 0 clamp(40px,6vw,72px)}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr);gap:clamp(28px,5vw,64px);align-items:center}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 22%, transparent);
+  padding:.4rem .85rem;border-radius:999px;margin-bottom:1.1rem;
+}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+
+.hero h1{font-size:clamp(2.3rem,6.2vw,3.65rem);font-weight:800;letter-spacing:-.035em}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(100deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero__lede{font-size:clamp(1rem,2.1vw,1.1rem);color:var(--muted);max-width:56ch;margin-top:1rem}
+.hero__lede strong{color:var(--text);font-weight:600}
+
+.pill-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:1.35rem 0 1.7rem}
+.pill{
+  font-size:.78rem;font-weight:600;color:var(--muted);
+  border:1px solid var(--border);background:var(--surface);
+  padding:.34rem .75rem;border-radius:999px;box-shadow:var(--shadow-sm);
+}
+
+.cta-row{display:flex;flex-wrap:wrap;gap:.7rem}
+
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.9rem;font-weight:650;text-decoration:none;
+  padding:.68rem 1.15rem;border-radius:13px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);box-shadow:var(--shadow-sm);
+  transition:transform .18s ease,border-color .18s ease,background .18s ease,color .18s ease;
+}
+.btn svg{width:16px;height:16px;flex:none}
+.btn:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent)}
+.btn--primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;
+  box-shadow:0 12px 26px -14px var(--accent);
+}
+.btn--primary:hover{color:#fff;filter:brightness(1.07)}
+
+/* Avatar placeholder — swap in a photo by replacing the div below with:
+   <img class="avatar avatar--photo" src="your-photo.jpg" alt="Portrait of Shan Jiang" /> */
+.avatar-wrap{display:flex;justify-content:center}
+.avatar{
+  position:relative;aspect-ratio:1;border-radius:50%;
+  /* leave room for the dashed ring so it can never overflow the column */
+  width:min(300px, calc(100% - 44px));
+  background:linear-gradient(140deg,var(--accent),var(--accent-2));
+  display:grid;place-items:center;
+  box-shadow:0 26px 60px -28px var(--accent);
+  isolation:isolate;
+}
+.avatar::after{
+  content:"";position:absolute;inset:9px;border-radius:50%;
+  background:var(--surface);z-index:0;
+}
+.avatar__initials{
+  position:relative;z-index:1;font-size:clamp(3rem,9vw,4.4rem);font-weight:800;letter-spacing:-.04em;
+  background:linear-gradient(140deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.avatar__note{
+  position:relative;z-index:1;text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);margin-top:-.45rem;
+}
+.avatar--photo{object-fit:cover;position:relative;z-index:1}
+.avatar-ring{
+  position:absolute;inset:-16px;border-radius:50%;border:1px dashed color-mix(in srgb,var(--accent) 40%, transparent);
+  animation:spin 26s linear infinite;pointer-events:none;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------------- Sections ---------------- */
+.section{padding:clamp(46px,7vw,80px) 0;scroll-margin-top:calc(var(--nav-h) + 12px)}
+.section + .section{border-top:1px solid var(--border)}
+
+.section__head{max-width:64ch;margin-bottom:clamp(24px,4vw,40px)}
+.section__label{
+  font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:.55rem;
+}
+.section__head h2{font-size:clamp(1.6rem,3.6vw,2.15rem)}
+.section__head p{color:var(--muted);margin-top:.7rem;font-size:.98rem}
+
+/* ---------------- About ---------------- */
+.about{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,4vw,40px);align-items:start}
+.about__text p{color:var(--muted)}
+.about__text strong{color:var(--text)}
+.fact-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.3rem 1.35rem;box-shadow:var(--shadow);
+}
+.fact-card h3{font-size:.82rem;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
+.fact-list{display:grid;gap:.75rem}
+.fact-list li{display:grid;grid-template-columns:auto 1fr;gap:.7rem;font-size:.9rem;color:var(--muted)}
+.fact-list b{color:var(--text);font-weight:650;display:block;font-size:.86rem}
+.fact-list svg{width:18px;height:18px;color:var(--accent);margin-top:.2rem}
+
+/* ---------------- Interests ---------------- */
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.35rem 1.3rem;box-shadow:var(--shadow-sm);
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 45%, var(--border));box-shadow:var(--shadow)}
+.card__icon{
+  width:44px;height:44px;border-radius:13px;display:grid;place-items:center;
+  background:var(--accent-soft);color:var(--accent);margin-bottom:.9rem;
+}
+.card__icon svg{width:23px;height:23px}
+.card h3{font-size:1.03rem;margin-bottom:.4rem}
+.card p{font-size:.89rem;color:var(--muted);margin:0}
+
+/* ---------------- Projects ---------------- */
+.projects{display:grid;gap:clamp(20px,3.4vw,32px)}
+.project{
+  display:grid;grid-template-columns:minmax(0,42%) minmax(0,58%);
+  gap:clamp(18px,3vw,34px);align-items:start;
+  background:var(--surface);border:1px solid var(--border);border-radius:calc(var(--radius) + 6px);
+  padding:clamp(16px,2.4vw,22px);box-shadow:var(--shadow-sm);
+  transition:border-color .25s ease,box-shadow .25s ease;
+}
+.project:hover{border-color:color-mix(in srgb,var(--accent) 40%, var(--border));box-shadow:var(--shadow)}
+.project--flip .project__media{order:2}
+
+.frame{
+  position:relative;overflow:hidden;border-radius:14px;
+  background:linear-gradient(140deg,var(--surface-2),var(--surface));
+  border:1px solid var(--border);aspect-ratio:16/9;
+}
+.frame--4x3{aspect-ratio:4/3}
+.frame video,.frame img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.frame__tag{
+  position:absolute;left:10px;top:10px;z-index:3;
+  font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:#fff;background:rgba(10,13,20,.72);border:1px solid rgba(255,255,255,.18);
+  padding:.3rem .6rem;border-radius:8px;backdrop-filter:blur(6px);
+}
+
+/* two-image cross-fade (project 4) */
+.cross img:first-child{animation:crossA 9s ease-in-out infinite}
+.cross img:last-child{animation:crossB 9s ease-in-out infinite}
+@keyframes crossA{0%,42%{opacity:1}52%,92%{opacity:0}100%{opacity:1}}
+@keyframes crossB{0%,42%{opacity:0}52%,92%{opacity:1}100%{opacity:0}}
+
+/* image carousel (project 5) */
+.carousel__track{position:absolute;inset:0}
+.carousel__slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;pointer-events:none}
+.carousel__slide.is-active{opacity:1;pointer-events:auto}
+.carousel__nav{
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:4;
+  display:flex;gap:6px;align-items:center;background:rgba(10,13,20,.6);padding:.32rem .5rem;border-radius:999px;
+  backdrop-filter:blur(6px);
+}
+.carousel__dot{
+  width:9px;height:9px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.42);transition:background .2s,transform .2s;
+}
+.carousel__dot.is-active{background:#fff;transform:scale(1.15)}
+.carousel__arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:4;
+  width:32px;height:32px;border-radius:50%;cursor:pointer;
+  border:1px solid rgba(255,255,255,.25);background:rgba(10,13,20,.55);color:#fff;
+  display:grid;place-items:center;backdrop-filter:blur(6px);opacity:0;transition:opacity .22s;
+}
+.frame:hover .carousel__arrow,.carousel__arrow:focus-visible{opacity:1}
+.carousel__arrow svg{width:16px;height:16px}
+.carousel__arrow--prev{left:9px}
+.carousel__arrow--next{right:9px}
+
+.project__body h3{font-size:clamp(1.05rem,2.3vw,1.24rem);margin-bottom:.5rem}
+.project__body h3 a{text-decoration:none;transition:color .2s}
+.project__body h3 a:hover{color:var(--accent)}
+.project__meta{font-size:.78rem;font-weight:600;color:var(--muted);letter-spacing:.03em;margin-bottom:.6rem;display:flex;flex-wrap:wrap;gap:.5rem}
+.project__meta span{display:inline-flex;align-items:center;gap:.35rem}
+.project__meta svg{width:14px;height:14px;color:var(--accent)}
+.project__body p{font-size:.92rem;color:var(--muted);margin-bottom:.9rem}
+.project__body p strong{color:var(--text)}
+
+.tag-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.tag{
+  font-size:.72rem;font-weight:650;color:var(--accent);
+  background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 20%, transparent);
+  padding:.22rem .58rem;border-radius:7px;
+}
+.link-row{display:flex;flex-wrap:wrap;gap:.5rem}
+.link-row .btn{padding:.5rem .85rem;font-size:.82rem;box-shadow:none}
+
+/* ---------------- Skills ---------------- */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.skill-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.25rem;box-shadow:var(--shadow-sm)}
+.skill-group h3{
+  font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  display:flex;align-items:center;gap:.5rem;margin-bottom:.85rem;
+}
+.skill-group h3::before{content:"";width:9px;height:9px;border-radius:3px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+.chips{display:flex;flex-wrap:wrap;gap:.42rem}
+.chip{
+  font-size:.83rem;font-weight:600;padding:.36rem .7rem;border-radius:9px;
+  background:var(--surface-2);border:1px solid transparent;color:var(--text);
+  transition:transform .16s ease,border-color .16s ease;
+}
+.chip:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 40%, transparent)}
+
+/* ---------------- Contact ---------------- */
+.contact{
+  background:var(--surface);border:1px solid var(--border);border-radius:calc(var(--radius) + 6px);
+  padding:clamp(22px,4vw,38px);box-shadow:var(--shadow);
+  display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,4vw,38px);align-items:center;
+}
+.contact h2{font-size:clamp(1.5rem,3.4vw,2rem);margin-bottom:.6rem}
+.contact p{color:var(--muted);font-size:.95rem}
+.contact__links{display:grid;gap:.6rem}
+.contact__links .btn{justify-content:flex-start;width:100%}
+
+/* ---------------- Footer ---------------- */
+.footer{border-top:1px solid var(--border);padding:30px 0 44px;font-size:.82rem;color:var(--muted)}
+.footer__grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:flex-start}
+.footer p{max-width:70ch;margin:0 0 .4rem}
+.footer__top{display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;font-weight:650;color:var(--accent)}
+.footer__top svg{width:15px;height:15px}
+
+/* ---------------- Reveal animation ---------------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.is-visible{opacity:1;transform:none}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width:980px){
+  .hero__grid{grid-template-columns:1fr;gap:34px}
+  .avatar-wrap{order:-1}
+  .avatar{width:min(230px, calc(100% - 44px))}
+  .about,.contact{grid-template-columns:1fr}
+  .project{grid-template-columns:1fr}
+  .project--flip .project__media{order:0}
+}
+
+@media (max-width:760px){
+  body{font-size:16px}
+  .nav__links{
+    position:absolute;left:0;right:0;top:var(--nav-h);
+    flex-direction:column;align-items:stretch;gap:2px;
+    background:var(--surface);border-bottom:1px solid var(--border);
+    padding:10px 16px 16px;box-shadow:var(--shadow);
+    display:none;
+  }
+  .nav__links.is-open{display:flex}
+  .nav__link{padding:.7rem .8rem;font-size:.95rem}
+  .nav__tools{margin-left:auto}
+  .burger{display:grid}
+  html{scroll-padding-top:calc(var(--nav-h) + 10px)}
+  .section{padding:42px 0}
+}
+
+@media (max-width:420px){
+  .wrap{padding-inline:16px}
+  .nav__inner{padding-inline:16px}
+  .brand__name span{display:none}
+  .btn{padding:.6rem .9rem;font-size:.85rem}
+}
+
+/* ---------------- Motion / print preferences ---------------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .reveal{opacity:1;transform:none}
+  .cross img:last-child{opacity:0}
+}
+
+@media print{
+  .nav,.footer__top,.carousel__arrow,.carousel__nav{display:none !important}
+  body{background:#fff}
+  .project,.card,.skill-group,.contact,.fact-card{box-shadow:none;break-inside:avoid}
+}
+</style>
 </head>
 <body>
-<!--导航栏-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">SHAN JIANG</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navMenu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
-                <li class="nav-item"><a class="nav-link" href="#interests">Research Interests</a></li>
-                <li class="nav-item"><a class="nav-link" href="#experience">Research Experience</a></li>
-                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<a class="skip-link" href="#about">Skip to content</a>
 
-<section id="about" class="section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-4 text-center mb‑4 mb‑md‑0">
-                <!--头像占位，后续替换src即可-->
-                <div class="avatar-placeholder mx-auto">Avatar Placeholder</div>
-            </div>
-            <div class="col-md‑8">
-                <h1>SHAN JIANG</h1>
-                <h4 class="text‑secondary">MSc Robotics, University of Manchester</h4>
-                <p class="mt‑3">
-                    I am currently studying Robotics at the University of Manchester. My work spans large‑model training, robotics simulation, front‑end 3D visualization and game development. I enjoy building complete end‑to‑end projects combining software simulation, AI agents and interactive user interfaces.
-                </p>
-                <div class="mt‑4">
-                    <a class="btn btn-outline‑dark me‑2" href="https://github.com/13716198820" target="_blank">GitHub</a>
-                    <a class="btn btn-outline‑dark me‑2" href="https://github.com/13716198820/13716198820.github.io/blob/main/CV.pdf" target="_blank">Download CV</a>
-                    <!--填入你的LinkedIn地址-->
-                    <a class="btn btn-outline‑dark" href="#" target="_blank">LinkedIn</a>
-                </div>
-            </div>
-        </div>
+<!-- ============================ NAV ============================ -->
+<header class="nav">
+  <div class="nav__inner">
+    <a class="brand" href="#top">
+      <span class="brand__mark">SJ</span>
+      <span class="brand__name">Shan Jiang <span>Robotics · Manchester</span></span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Section navigation">
+      <a class="nav__link" href="#about">About</a>
+      <a class="nav__link" href="#interests">Research Interests</a>
+      <a class="nav__link" href="#projects">Research Experience</a>
+      <a class="nav__link" href="#skills">Skills</a>
+      <a class="nav__link" href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav__tools">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20.5 14.4A8.6 8.6 0 0 1 9.6 3.5 8.6 8.6 0 1 0 20.5 14.4Z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6"/></svg>
+      </button>
+      <button class="icon-btn burger" id="burger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============================ HERO ============================ -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>MSc Robotics · University of Manchester</span>
+      <h1>Shan <em>Jiang</em></h1>
+      <p class="hero__lede">
+        I am studying <strong>Robotics at the University of Manchester</strong>. My interests sit where autonomy
+        meets interaction: training large models, teaching robots to explore the world on their own, and building
+        interactive software — from 3D web apps to games — that people actually enjoy using.
+      </p>
+      <ul class="pill-row">
+        <li class="pill">Large Language Model Training</li>
+        <li class="pill">Robotics &amp; Autonomy</li>
+        <li class="pill">Front-end Development</li>
+        <li class="pill">Game Development</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="https://github.com/13716198820" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.93.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="https://github.com/13716198820/13716198820.github.io/blob/main/CV.pdf" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>
+          Download CV
+        </a>
+        <!-- TODO: replace with your own LinkedIn profile URL -->
+        <a class="btn" href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3zM9.5 9h3.8v1.7h.06c.53-1 1.83-2.05 3.76-2.05C20.6 8.65 22 10.6 22 14.1V21h-4v-6.1c0-1.5-.54-2.5-1.87-2.5-1.02 0-1.63.68-1.9 1.34-.1.24-.13.57-.13.9V21h-4Z"/></svg>
+          LinkedIn
+        </a>
+        <!-- TODO: replace with your own email address -->
+        <a class="btn" href="mailto:your.email@example.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 5.6L20 7"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+
+    <div class="avatar-wrap">
+      <div class="avatar">
+        <span class="avatar-ring" aria-hidden="true"></span>
+        <span class="avatar__initials">SJ</span>
+        <span class="avatar__note">Photo coming soon</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="interests" class="section bg‑light">
-    <div class="container">
-        <h2 class="mb‑4">Research Interests</h2>
-        <ul class="fs‑5">
-            <li>Large‑model / AI Agent Training</li>
-            <li>Robotics navigation, simulation and mapping</li>
-            <li>Front‑end & Web3D visualization</li>
-            <li>Game development (Unreal / Android / Java desktop)</li>
+<!-- ============================ ABOUT ============================ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__label">01 — About</div>
+      <h2>A short introduction</h2>
+    </div>
+
+    <div class="about">
+      <div class="about__text reveal">
+        <p>
+          I am a postgraduate student <strong>studying Robotics at the University of Manchester</strong>, with a
+          background that spans robotics autonomy, machine learning and software engineering. Most of my work starts
+          from a simple question — <em>can the system work out what to do by itself?</em> — whether that is a robot
+          mapping a room it has never seen, or a game AI that out-manoeuvres a human player.
+        </p>
+        <p>
+          Alongside robotics I build the software around the research: 3D interfaces in Three.js, desktop and Android
+          applications, and responsive web front-ends. I enjoy owning the whole path from algorithm to something
+          polished enough that other people can pick it up and play with it.
+        </p>
+        <p>
+          <strong>Career objective.</strong> To work as a robotics and AI engineer building autonomous systems that
+          combine perception, planning and learning — progressing towards leading projects that bring robotics and
+          interactive, human-facing software together.
+        </p>
+      </div>
+
+      <aside class="fact-card reveal" aria-label="Quick facts">
+        <h3>Quick facts</h3>
+        <ul class="fact-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 5l9 4.5-9 4.5Z"/><path d="M7 12v4.2c0 .8 2.2 2.3 5 2.3s5-1.5 5-2.3V12"/></svg>
+            <span><b>MSc Robotics</b>University of Manchester</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.6V12l3 1.8"/></svg>
+            <span><b>Focus areas</b>Robotics · LLM training · Web &amp; games</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7 4 12l5 5M15 7l5 5-5 5"/></svg>
+            <span><b>Tools I reach for</b>Python · C++ · ROS 2 · Unreal · Three.js</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.3-6.5-10a6.5 6.5 0 1 1 13 0C18.5 15.7 12 21 12 21Z"/><circle cx="12" cy="10.6" r="2.4"/></svg>
+            <span><b>Based in</b>Manchester, United Kingdom</span>
+          </li>
         </ul>
+      </aside>
     </div>
+  </div>
 </section>
 
-<section id="experience" class="section">
-    <div class="container">
-        <h2 class="mb‑5">Research Experience</h2>
-
-        <!--项目1：Game of Blocks world with AI – Dueler-->
-        <div class="card project‑card">
-            <div class="card‑body p‑4">
-                <h4>Implementation of Game of Blocks world with AI – Dueler</h4>
-                <p>
-                    Built a Blocks‑world adversarial game with AI opponent agent. The trained AI can perform counter‑strategies such as removing critical blocks and making feint moves against human players.
-                    The frontend is implemented with ThreeJS to render a rich interactive 3D board. It supports single‑player, multiplayer and human‑versus‑AI game modes.
-                </p>
-                <div class="mt‑3">
-                    <a href="https://github.com/13716198820/3dblock" target="_blank" class="btn btn‑sm btn‑primary">Code Repository</a>
-                    <a href="https://github.com/13716198820/3dblock/blob/main/video.mp4" target="_blank" class="btn btn‑sm btn‑outline‑primary">Demo Video</a>
-                    <a href="https://github.com/13716198820/3dblock/blob/main/essay.pdf" target="_blank" class="btn btn‑sm btn‑outline‑secondary">Paper PDF</a>
-                </div>
-            </div>
-        </div>
-
-        <!--项目2 FPS Unreal-->
-        <div class="card project‑card">
-            <div class="card‑body p‑4">
-                <h4>FPS game based on Unreal Engine</h4>
-                <p>
-                    A first‑person shooter game developed in Unreal Engine. It supports multiple game maps for single‑player and multiplayer gameplay. Implemented hit feedback and damage effects for shooting combat scenarios.
-                </p>
-                <div class="mt‑3">
-                    <a href="https://github.com/13716198820/gunfps" target="_blank" class="btn btn‑sm btn‑primary">Code Repository</a>
-                    <a href="https://github.com/13716198820/gunfps/blob/main/video.mp4" target="_blank" class="btn btn‑sm btn‑outline‑primary">Demo Video</a>
-                </div>
-            </div>
-        </div>
-
-        <!--项目3 Bug1 机器人探索建图 Webots-->
-        <div class="card project‑card">
-            <div class="card‑body p‑4">
-                <h4>Robot Arena Exploration and Mapping based on Bug1 algorithm</h4>
-                <p>
-                    Autonomous exploration and occupancy‑grid mapping research for unknown environments using Pioneer 3‑DX robot within Webots simulation. Combined Bug1 algorithm with PID control for stable navigation and iterative anti‑collision logic. Robot can fully explore the arena without pre‑loaded map data and generate high‑precision occupancy grid maps.
-                </p>
-                <div class="mt‑3">
-                    <a href="https://github.com/13716198820/robot" target="_blank" class="btn btn‑sm btn‑primary">Code Repository</a>
-                    <a href="https://github.com/13716198820/robot/blob/main/video.mp4" target="_blank" class="btn btn‑sm btn‑outline‑primary">Demo Video</a>
-                    <a href="https://github.com/13716198820/robot/blob/main/essay.pdf" target="_blank" class="btn btn‑sm btn‑outline‑secondary">Paper PDF</a>
-                </div>
-            </div>
-        </div>
-
-        <!--项目4 Java卡牌游戏，轮播图-->
-        <div class="card project‑card">
-            <div class="card‑body p‑4">
-                <h4>Implementation of card game with AI (Texas Hold'em style)</h4>
-                <div id="carousel‑cardgame" class="carousel slide mb‑3" data‑bs‑ride="carousel">
-                    <div class="carousel‑inner">
-                        <div class="carousel‑item active">
-                            <img src="https://github.com/13716198820/javaproject/blob/main/20261011‑112614.jpg?raw=true" class="d‑block w‑100" alt="screenshot1">
-                        </div>
-                        <div class="carousel‑item">
-                            <img src="https://github.com/13716198820/javaproject/blob/main/20261011‑112643.jpg?raw=true" class="d‑block w‑100" alt="screenshot2">
-                        </div>
-                    </div>
-                    <button class="carousel‑control‑prev" type="button" data‑bs‑target="#carousel‑cardgame" data‑bs‑slide="prev">
-                        <span class="carousel‑control‑prev‑icon"></span>
-                    </button>
-                    <button class="carousel‑control‑next" type="button" data‑bs‑target="#carousel‑cardgame" data‑bs‑slide="next">
-                        <span class="carousel‑control‑next‑icon"></span>
-                    </button>
-                </div>
-                <p>
-                    Desktop card game application written in Java. Players swap cards and compete against AI following Texas Hold'em poker hand‑rank rules.
-                </p>
-                <div class="mt‑2">
-                    <a href="https://github.com/13716198820/javaproject" target="_blank" class="btn btn‑sm btn‑primary">Code Repository</a>
-                </div>
-            </div>
-        </div>
-
-        <!--项目5 Android打地鼠，多图轮播-->
-        <div class="card project‑card">
-            <div class="card‑body p‑4">
-                <h4>Implementation of Whack‑a‑mole with Android Native</h4>
-                <div id="carousel‑android" class="carousel slide mb‑3" data‑bs‑ride="carousel">
-                    <div class="carousel‑inner">
-                        <div class="carousel‑item active">
-                            <img src="https://github.com/13716198820/android/blob/main/images/part2.PNG?raw=true" class="d‑block w‑100" alt="android‑1">
-                        </div>
-                        <div class="carousel‑item">
-                            <img src="https://github.com/13716198820/android/blob/main/images/part3.PNG?raw=true" class="d‑block w‑100" alt="android‑2">
-                        </div>
-                        <div class="carousel‑item">
-                            <img src="https://github.com/13716198820/android/blob/main/images/part4.PNG?raw=true" class="d‑block w‑100" alt="android‑3">
-                        </div>
-                    </div>
-                    <button class="carousel‑control‑prev" type="button" data‑bs‑target="#carousel‑android" data‑bs‑slide="prev">
-                        <span class="carousel‑control‑prev‑icon"></span>
-                    </button>
-                    <button class="carousel‑control‑next" type="button" data‑bs‑target="#carousel‑android" data‑bs‑slide="next">
-                        <span class="carousel‑control‑next‑icon"></span>
-                    </button>
-                </div>
-                <p>
-                    Native Android whack‑a‑mole game. All background assets and graphic materials are manually polished and processed via Photoshop for improved visual quality.
-                </p>
-                <div class="mt‑2">
-                    <a href="https://github.com/13716198820/android" target="_blank" class="btn btn‑sm btn‑primary">Code Repository</a>
-                </div>
-            </div>
-        </div>
+<!-- ============================ INTERESTS ============================ -->
+<section class="section" id="interests">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__label">02 — Research Interests</div>
+      <h2>What I want to work on</h2>
+      <p>Four areas I keep coming back to, and the directions I hope to take them further.</p>
     </div>
+
+    <div class="grid-cards">
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="12" cy="12" r="2.5"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M6.8 7 10 10.5M6.8 17 10 13.5M17.2 7 14 10.5M17.2 17 14 13.5"/></svg>
+        </div>
+        <h3>Large Language Model Training</h3>
+        <p>Training and fine-tuning large models — data curation, efficient training pipelines and reinforcement learning from feedback.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8.5" width="16" height="11" rx="3.2"/><path d="M12 8.5V6"/><circle cx="12" cy="4.4" r="1.3"/><circle cx="9" cy="13.6" r="1.2"/><circle cx="15" cy="13.6" r="1.2"/><path d="M9.8 16.8h4.4"/></svg>
+        </div>
+        <h3>Robotics</h3>
+        <p>Autonomous navigation, exploration of unknown environments and mapping — turning sensor data into decisions a robot can act on.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9.3h18M6.4 6.9h.01M8.8 6.9h.01"/><path d="M9.5 13 7.8 14.9l1.7 1.9M14.5 13l1.7 1.9-1.7 1.9"/></svg>
+        </div>
+        <h3>Front-end Development</h3>
+        <p>Responsive, accessible interfaces — data visualisation and 3D dashboards that make complex systems easy to inspect.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.6 8h8.8a5 5 0 0 1 4.9 4.1l.5 3a3 3 0 0 1-5.6 1.8l-.5-.9H8.3l-.5.9a3 3 0 0 1-5.6-1.8l.5-3A5 5 0 0 1 7.6 8Z"/><path d="M7 11.4h2.2M8.1 10.3v2.2"/><circle cx="15.4" cy="11.4" r=".9"/><circle cx="17.5" cy="13.2" r=".9"/></svg>
+        </div>
+        <h3>Game Development</h3>
+        <p>Real-time 3D systems and game AI — opponents that reason about the player instead of just following a script.</p>
+      </article>
+    </div>
+  </div>
 </section>
 
-<section id="skills" class="section bg‑light">
-    <div class="container">
-        <h2 class="mb‑4">Technical Skills</h2>
-        <div class="row">
-            <div class="col‑md‑6">
-                <h5>Programming & Framework</h5>
-                <ul>
-                    <li>Python, Java, C#, C++</li>
-                    <li>HTML / CSS / JavaScript / Vue</li>
-                    <li>ROS2</li>
-                    <li>Android Native</li>
-                </ul>
-            </div>
-            <div class="col‑md‑6">
-                <h5>Software & Engine</h5>
-                <ul>
-                    <li>Unreal Engine</li>
-                    <li>Photoshop, Premiere, After Effect</li>
-                </ul>
-            </div>
+<!-- ============================ PROJECTS ============================ -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__label">03 — Research Experience</div>
+      <h2>Projects &amp; research work</h2>
+      <p>Five projects spanning game AI, robotics research and application development. Each entry links to its source repository, and to a report or demo where one exists.</p>
+    </div>
+
+    <div class="projects">
+
+      <!-- 1 — Blocks World -->
+      <article class="project reveal">
+        <div class="project__media">
+          <div class="frame">
+            <span class="frame__tag">Game AI · Three.js</span>
+            <video class="teaser" muted loop playsinline preload="metadata" aria-label="Demo of the 3D Blocks World game with an AI opponent">
+              <source src="https://cdn.jsdelivr.net/gh/13716198820/3dblock@main/video.mp4" type="video/mp4" />
+              Your browser cannot play this video — <a href="https://github.com/13716198820/3dblock/blob/main/video.mp4">open it on GitHub</a>.
+            </video>
+          </div>
         </div>
+        <div class="project__body">
+          <h3><a href="https://github.com/13716198820/3dblock" target="_blank" rel="noopener noreferrer">Implementation of Blocks World with AI — Dueler</a></h3>
+          <div class="project__meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-5.6 7-5.6S19 16.4 19 20"/></svg>Individual project</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="M10 9.4l4.6 2.6L10 14.6Z"/></svg>Video · Report</span>
+          </div>
+          <p>
+            A 3D take on the classic Blocks World planning puzzle, built with <strong>Three.js</strong>, in which a
+            <strong>trained AI agent competes against a human player</strong> rather than simply solving the puzzle on
+            its own. The agent reasons about both the block stacks and its opponent's goal: it will take blocks the
+            human player needs, and play deliberate feints and decoys to break their plan. The project supports
+            single-player, local multiplayer and human-vs-AI modes on an animated board that makes every move easy to
+            read.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Three.js</span><span class="tag">JavaScript</span>
+            <span class="tag">Game AI</span><span class="tag">Adversarial search</span><span class="tag">3D UI</span>
+          </div>
+          <div class="link-row">
+            <a class="btn" href="https://github.com/13716198820/3dblock/blob/main/video.mp4" target="_blank" rel="noopener noreferrer">Video</a>
+            <a class="btn" href="https://github.com/13716198820/3dblock" target="_blank" rel="noopener noreferrer">Code</a>
+            <a class="btn" href="https://github.com/13716198820/3dblock/blob/main/essay.pdf" target="_blank" rel="noopener noreferrer">Report (PDF)</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 — Unreal FPS -->
+      <article class="project project--flip reveal">
+        <div class="project__media">
+          <div class="frame">
+            <span class="frame__tag">Game Dev · Unreal</span>
+            <video class="teaser" muted loop playsinline preload="metadata" aria-label="Gameplay demo of the Unreal Engine first-person shooter">
+              <source src="https://cdn.jsdelivr.net/gh/13716198820/gunfps@main/video.mp4" type="video/mp4" />
+              Your browser cannot play this video — <a href="https://github.com/13716198820/gunfps/blob/main/video.mp4">open it on GitHub</a>.
+            </video>
+          </div>
+        </div>
+        <div class="project__body">
+          <h3><a href="https://github.com/13716198820/gunfps" target="_blank" rel="noopener noreferrer">First-Person Shooter built in Unreal Engine</a></h3>
+          <div class="project__meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-5.6 7-5.6S19 16.4 19 20"/></svg>Individual project</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="M10 9.4l4.6 2.6L10 14.6Z"/></svg>Video demo</span>
+          </div>
+          <p>
+            A first-person shooter built in <strong>Unreal Engine</strong> with several playable maps across both
+            single-player and <strong>multiplayer</strong> modes. The emphasis was on combat feel: reliable hit
+            detection when firing, reactive feedback for landing hits, and clear damage feedback for the player when
+            they are hit — supported by health and HUD elements that keep the state of a firefight readable at a
+            glance.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Unreal Engine</span><span class="tag">Blueprints</span>
+            <span class="tag">Multiplayer</span><span class="tag">Level design</span><span class="tag">Hit detection</span>
+          </div>
+          <div class="link-row">
+            <a class="btn" href="https://github.com/13716198820/gunfps/blob/main/video.mp4" target="_blank" rel="noopener noreferrer">Video</a>
+            <a class="btn" href="https://github.com/13716198820/gunfps" target="_blank" rel="noopener noreferrer">Code</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 — Robot arena exploration -->
+      <article class="project reveal">
+        <div class="project__media">
+          <div class="frame">
+            <span class="frame__tag">Robotics · Bug1</span>
+            <video class="teaser" muted loop playsinline preload="metadata" aria-label="Webots simulation of the Pioneer 3-DX exploring an unknown arena">
+              <source src="https://cdn.jsdelivr.net/gh/13716198820/robot@main/video.mp4" type="video/mp4" />
+              Your browser cannot play this video — <a href="https://github.com/13716198820/robot/blob/main/video.mp4">open it on GitHub</a>.
+            </video>
+          </div>
+        </div>
+        <div class="project__body">
+          <h3><a href="https://github.com/13716198820/robot" target="_blank" rel="noopener noreferrer">Arena Exploration &amp; Mapping with the Bug1 Algorithm</a></h3>
+          <div class="project__meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-5.6 7-5.6S19 16.4 19 20"/></svg>Research project</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="M10 9.4l4.6 2.6L10 14.6Z"/></svg>Video · Report</span>
+          </div>
+          <p>
+            Research into autonomous exploration and occupancy-grid map construction of unknown arenas, using a
+            <strong>Pioneer 3-DX</strong> robot in the <strong>Webots</strong> simulation environment. The core task
+            was to design a navigation strategy and collision-avoidance mechanism that let the robot explore
+            <em>without any preloaded map information</em>. I iterated the anti-collision monitoring logic and
+            combined the <strong>Bug1 algorithm with PID control</strong> to achieve stable navigation, which produced
+            high-accuracy occupancy grid maps for both the simple and complex test arenas.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Webots</span><span class="tag">Bug1 algorithm</span>
+            <span class="tag">PID control</span><span class="tag">Occupancy grid mapping</span><span class="tag">Collision avoidance</span>
+          </div>
+          <div class="link-row">
+            <a class="btn" href="https://github.com/13716198820/robot/blob/main/video.mp4" target="_blank" rel="noopener noreferrer">Video</a>
+            <a class="btn" href="https://github.com/13716198820/robot" target="_blank" rel="noopener noreferrer">Code</a>
+            <a class="btn" href="https://github.com/13716198820/robot/blob/main/essay.pdf" target="_blank" rel="noopener noreferrer">Report (PDF)</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 — Java card game -->
+      <article class="project project--flip reveal">
+        <div class="project__media">
+          <div class="frame frame--4x3 cross">
+            <span class="frame__tag">Java · Card game AI</span>
+            <img src="https://cdn.jsdelivr.net/gh/13716198820/javaproject@main/20261011-112614.jpg"
+                 alt="Card game table view: the player's hand and the computer opponent's cards" loading="lazy" decoding="async" />
+            <img src="https://cdn.jsdelivr.net/gh/13716198820/javaproject@main/20261011-112643.jpg"
+                 alt="Card game round result: player and computer hands compared by poker hand ranking" loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <div class="project__body">
+          <h3><a href="https://github.com/13716198820/javaproject" target="_blank" rel="noopener noreferrer">Card Game with an AI Opponent (Java desktop application)</a></h3>
+          <div class="project__meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-5.6 7-5.6S19 16.4 19 20"/></svg>Individual project</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.4"/><rect x="6.5" y="9" width="5" height="7" rx="1"/><path d="M13.5 10.5h4M13.5 13.5h4"/></svg>Screenshots</span>
+          </div>
+          <p>
+            A Java desktop application that plays a card-battle game against a computer opponent. Players
+            <strong>swap cards in and out of their hand</strong> to build the strongest five-card combination, and the
+            result of each round is decided by comparing hand rankings under <strong>Texas Hold'em poker rules</strong>.
+            The project covers the full game loop — dealing, discarding and drawing, evaluating hand strength, driving
+            an AI opponent's decisions, and scoring rounds — behind a desktop GUI.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Java</span><span class="tag">OOP design</span>
+            <span class="tag">Game AI</span><span class="tag">Desktop GUI</span><span class="tag">Poker hand evaluation</span>
+          </div>
+          <div class="link-row">
+            <a class="btn" href="https://github.com/13716198820/javaproject" target="_blank" rel="noopener noreferrer">Code</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 — Android whack-a-mole -->
+      <article class="project reveal">
+        <div class="project__media">
+          <div class="frame frame--4x3" data-carousel>
+            <span class="frame__tag">Android · Native</span>
+            <div class="carousel__track">
+              <div class="carousel__slide is-active">
+                <img src="https://cdn.jsdelivr.net/gh/13716198820/android@main/images/part2.PNG" alt="Whack-a-mole gameplay screen with the reworked background and sprites" loading="lazy" decoding="async" />
+              </div>
+              <div class="carousel__slide">
+                <img src="https://cdn.jsdelivr.net/gh/13716198820/android@main/images/part3.PNG" alt="Whack-a-mole mid-game screen showing score and timer" loading="lazy" decoding="async" />
+              </div>
+              <div class="carousel__slide">
+                <img src="https://cdn.jsdelivr.net/gh/13716198820/android@main/images/part4.PNG" alt="Whack-a-mole end-of-game screen showing the final score" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <button class="carousel__arrow carousel__arrow--prev" type="button" aria-label="Previous screenshot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+            </button>
+            <button class="carousel__arrow carousel__arrow--next" type="button" aria-label="Next screenshot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+            <div class="carousel__nav" role="tablist" aria-label="Screenshot selection">
+              <button class="carousel__dot is-active" type="button" role="tab" aria-selected="true" aria-label="Screenshot 1"></button>
+              <button class="carousel__dot" type="button" role="tab" aria-selected="false" aria-label="Screenshot 2"></button>
+              <button class="carousel__dot" type="button" role="tab" aria-selected="false" aria-label="Screenshot 3"></button>
+            </div>
+          </div>
+        </div>
+        <div class="project__body">
+          <h3><a href="https://github.com/13716198820/android" target="_blank" rel="noopener noreferrer">Whack-a-Mole game for Android</a></h3>
+          <div class="project__meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-5.6 7-5.6S19 16.4 19 20"/></svg>Individual project</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M10.5 19h3"/></svg>Mobile app</span>
+          </div>
+          <p>
+            A whack-a-mole game written in <strong>native Android</strong>, covering the full game loop of spawning,
+            timing, scoring and hit detection across multiple difficulty states. Rather than shipping the default
+            assets, every visual element — backgrounds, sprites and UI — was <strong>redrawn in Photoshop</strong> to
+            give the game a consistent, more polished look.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Android (Java)</span><span class="tag">Game loop</span>
+            <span class="tag">UI design</span><span class="tag">Photoshop</span>
+          </div>
+          <div class="link-row">
+            <a class="btn" href="https://github.com/13716198820/android" target="_blank" rel="noopener noreferrer">Code</a>
+            <a class="btn" href="https://cdn.jsdelivr.net/gh/13716198820/android@main/images/part2.PNG" target="_blank" rel="noopener noreferrer">Screenshot 1</a>
+            <a class="btn" href="https://cdn.jsdelivr.net/gh/13716198820/android@main/images/part3.PNG" target="_blank" rel="noopener noreferrer">Screenshot 2</a>
+            <a class="btn" href="https://cdn.jsdelivr.net/gh/13716198820/android@main/images/part4.PNG" target="_blank" rel="noopener noreferrer">Screenshot 3</a>
+          </div>
+        </div>
+      </article>
+
     </div>
+  </div>
 </section>
 
-<section id="contact" class="section">
-    <div class="container">
-        <h2>Contact</h2>
-        <p>GitHub: <a href="https://github.com/13716198820" target="_blank">github.com/13716198820</a></p>
-        <p>CV: <a href="https://github.com/13716198820/13716198820.github.io/blob/main/CV.pdf" target="_blank">CV.pdf</a></p>
+<!-- ============================ SKILLS ============================ -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__label">04 — Skills</div>
+      <h2>Technical toolkit</h2>
+      <p>Languages, frameworks and creative tools I use regularly across robotics, web and game projects.</p>
     </div>
+
+    <div class="skills">
+      <div class="skill-group reveal">
+        <h3>Programming</h3>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">Java</span><span class="chip">C++</span>
+          <span class="chip">C#</span><span class="chip">JavaScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <h3>Robotics</h3>
+        <div class="chips">
+          <span class="chip">ROS 2</span><span class="chip">Webots</span><span class="chip">PID control</span>
+          <span class="chip">Bug algorithms</span><span class="chip">Occupancy grid mapping</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <h3>Web &amp; Front-end</h3>
+        <div class="chips">
+          <span class="chip">Vue</span><span class="chip">Responsive layout</span><span class="chip">Three.js</span>
+          <span class="chip">Accessibility</span><span class="chip">Git &amp; GitHub Pages</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <h3>Game &amp; 3D</h3>
+        <div class="chips">
+          <span class="chip">Unreal Engine</span><span class="chip">Game AI</span>
+          <span class="chip">Level design</span><span class="chip">3D interaction</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <h3>Mobile &amp; Creative</h3>
+        <div class="chips">
+          <span class="chip">Android</span><span class="chip">Photoshop</span>
+          <span class="chip">Premiere Pro</span><span class="chip">After Effects</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<footer class="bg‑dark text‑white py‑4">
-    <div class="container text‑center">
-        <p>SHAN JIANG | University of Manchester MSc Robotics</p>
-        <p class="small">Note: Ensure all multimedia materials respect copyright requirements for coursework submission.</p>
+<!-- ============================ CONTACT ============================ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div>
+        <div class="section__label">05 — Contact</div>
+        <h2>Get in touch</h2>
+        <p>
+          I am always glad to talk about robotics, model training, or anything that combines the two with a
+          good interface. The quickest ways to reach me are GitHub and my CV; LinkedIn and email are below.
+        </p>
+      </div>
+      <div class="contact__links">
+        <a class="btn btn--primary" href="https://github.com/13716198820" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.93.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+          github.com/13716198820
+        </a>
+        <a class="btn" href="https://github.com/13716198820/13716198820.github.io/blob/main/CV.pdf" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>
+          CV (PDF)
+        </a>
+        <!-- TODO: replace both hrefs below with your own details -->
+        <a class="btn" href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3zM9.5 9h3.8v1.7h.06c.53-1 1.83-2.05 3.76-2.05C20.6 8.65 22 10.6 22 14.1V21h-4v-6.1c0-1.5-.54-2.5-1.87-2.5-1.02 0-1.63.68-1.9 1.34-.1.24-.13.57-.13.9V21h-4Z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn" href="mailto:your.email@example.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 5.6L20 7"/></svg>
+          Email
+        </a>
+      </div>
     </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <p>© <span id="year">2026</span> Shan Jiang · Designed and hand-coded for this portfolio (single HTML page, no third-party frameworks).</p>
+      <p>All project media shown here is my own work from my own repositories. Named products and trademarks — including Unreal Engine, Android, ROS 2, Java, Adobe Photoshop/Premiere Pro/After Effects and Three.js — are the property of their respective owners and are referenced for identification only. Icons are original inline SVG.</p>
+    </div>
+    <a class="footer__top" href="#top">
+      Back to top
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>
+    </a>
+  </div>
 </footer>
 
+<script>
+(function () {
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Theme ---------- */
+  var root = document.documentElement;
+  var themeToggle = document.getElementById("themeToggle");
+  var stored = null;
+  try { stored = localStorage.getItem("sj-theme"); } catch (e) { stored = null; }
+  if (!stored) {
+    stored = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  root.setAttribute("data-theme", stored);
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("sj-theme", next); } catch (e) {}
+    });
+  }
+
+  /* ---------- Mobile navigation ---------- */
+  var burger = document.getElementById("burger");
+  var navLinks = document.getElementById("navLinks");
+  if (burger && navLinks) {
+    burger.addEventListener("click", function () {
+      var open = navLinks.classList.toggle("is-open");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    navLinks.addEventListener("click", function (event) {
+      if (event.target.closest("a")) {
+        navLinks.classList.remove("is-open");
+        burger.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  var revealables = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || reduceMotion) {
+    Array.prototype.forEach.call(revealables, function (el) { el.classList.add("is-visible"); });
+  } else {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    Array.prototype.forEach.call(revealables, function (el) { revealObserver.observe(el); });
+  }
+
+  /* ---------- Scroll spy ---------- */
+  var sections = document.querySelectorAll("main section[id]");
+  var links = document.querySelectorAll(".nav__link");
+  if ("IntersectionObserver" in window && sections.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) { return; }
+        Array.prototype.forEach.call(links, function (link) {
+          var match = link.getAttribute("href") === "#" + entry.target.id;
+          link.classList.toggle("is-current", match);
+          if (match) { link.setAttribute("aria-current", "true"); }
+          else { link.removeAttribute("aria-current"); }
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    Array.prototype.forEach.call(sections, function (s) { spy.observe(s); });
+  }
+
+  /* ---------- Inline demo videos ----------
+     Each teaser plays silently while it is on screen (like a GIF) and pauses
+     as soon as it scrolls out, so the page stays light on bandwidth. */
+  var teasers = document.querySelectorAll("video.teaser");
+  if (reduceMotion) {
+    Array.prototype.forEach.call(teasers, function (v) {
+      v.setAttribute("controls", "controls");
+      v.setAttribute("preload", "none");
+    });
+  } else if ("IntersectionObserver" in window) {
+    var videoObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var video = entry.target;
+        if (entry.isIntersecting) {
+          var attempt = video.play();
+          if (attempt && typeof attempt.catch === "function") { attempt.catch(function () {}); }
+        } else if (!video.paused) {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.35 });
+    Array.prototype.forEach.call(teasers, function (v) { videoObserver.observe(v); });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        Array.prototype.forEach.call(teasers, function (v) { v.pause(); });
+      }
+    });
+  }
+
+  /* ---------- Screenshot carousel ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-carousel]"), function (carousel) {
+    var slides = carousel.querySelectorAll(".carousel__slide");
+    var dots = carousel.querySelectorAll(".carousel__dot");
+    var prev = carousel.querySelector(".carousel__arrow--prev");
+    var next = carousel.querySelector(".carousel__arrow--next");
+    if (slides.length < 2) { return; }
+
+    var index = 0;
+    var timer = null;
+
+    function show(target) {
+      index = (target + slides.length) % slides.length;
+      Array.prototype.forEach.call(slides, function (slide, i) {
+        slide.classList.toggle("is-active", i === index);
+      });
+      Array.prototype.forEach.call(dots, function (dot, i) {
+        dot.classList.toggle("is-active", i === index);
+        dot.setAttribute("aria-selected", i === index ? "true" : "false");
+      });
+    }
+
+    function start() {
+      if (reduceMotion || timer) { return; }
+      timer = window.setInterval(function () { show(index + 1); }, 4800);
+    }
+    function stop() {
+      if (timer) { window.clearInterval(timer); timer = null; }
+    }
+
+    if (prev) { prev.addEventListener("click", function () { show(index - 1); }); }
+    if (next) { next.addEventListener("click", function () { show(index + 1); }); }
+    Array.prototype.forEach.call(dots, function (dot, i) {
+      dot.addEventListener("click", function () { show(i); });
+    });
+
+    carousel.addEventListener("mouseenter", stop);
+    carousel.addEventListener("mouseleave", start);
+    carousel.addEventListener("focusin", stop);
+    carousel.addEventListener("focusout", start);
+
+    if ("IntersectionObserver" in window && !reduceMotion) {
+      var carouselObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { start(); } else { stop(); }
+        });
+      }, { threshold: 0.4 });
+      carouselObserver.observe(carousel);
+    } else if (!reduceMotion) {
+      start();
+    }
+
+    show(0);
+  });
+
+  /* ---------- Footer year ---------- */
+  var year = document.getElementById("year");
+  if (year) { year.textContent = String(new Date().getFullYear()); }
+})();
+</script>
 </body>
 </html>
